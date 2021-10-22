@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
-const Tour = ({ tour, id, tourData, setTourData }) => {
-  // const [show, setShow] = useState(false);
+const Tour = ({ tour, id,  deleteTour }) => {
   const [text, setText] = useState("Read More");
-
-  const deleteTour = (id) => {
-    setTourData(tourData.filter((tour) => tour.id !== id));
-  };
 
   const toggleText = () => {
     text === "Read More" ? setText("Show Less") : setText("Read More");
