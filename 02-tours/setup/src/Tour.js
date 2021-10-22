@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 
 const Tour = ({ tour, id, tourData, setTourData }) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [text, setText] = useState("Read More");
-  console.log(tourData);
 
   const deleteTour = (id) => {
     setTourData(tourData.filter((tour) => tour.id !== id));
   };
 
   const toggleText = () => {
-    show === false ? setShow(true) : setShow(false);
-    text === "Read More" ? setText('Show Less')  : setText("Read More");
+    text === "Read More" ? setText("Show Less") : setText("Read More");
   };
   return (
     <div className="single-tour">
@@ -22,7 +20,9 @@ const Tour = ({ tour, id, tourData, setTourData }) => {
           <div className="tour-price">{tour.price}</div>
         </div>
         <p>
-          {text === 'Read More' ? tour.info.substring(0, 200) +'...' : tour.info}
+          {text === "Read More"
+            ? tour.info.substring(0, 200) + "..."
+            : tour.info}
           <button onClick={() => toggleText()}>{text}</button>
         </p>
         <button onClick={() => deleteTour(id)} className="delete-btn">
