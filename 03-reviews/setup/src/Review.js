@@ -10,7 +10,7 @@ const Review = () => {
     if (index < 0) {
       return people.length - 1;
     }
-    if (index > people.length - 1 ) {
+    if (index > people.length - 1) {
       return 0;
     }
     return index;
@@ -29,8 +29,11 @@ const Review = () => {
   };
 
   const surpriseMe = () => {
-    const random = Math.floor(Math.random() * (people.length - 1)) + 1;
-    setIndex(random);
+    let random = Math.floor(Math.random() * people.length);
+    if (random === index) {
+      random = random + 1;
+    }
+    setIndex(checkIndex(random));
   };
 
   return (
