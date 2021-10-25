@@ -6,12 +6,20 @@ const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, job, image, text } = people[index];
 
-  const changeReview = () => {
+  const changeReview = (type) => {
     setIndex((prevIndex) => {
-      if (prevIndex === people.length - 1) {
-        return 1;
+      if (type === "prev") {
+        if (index == 0) {
+          return people.length - 1;
+        } else {
+          return index - 1;
+        }
       } else {
-        return prevIndex + 1;
+        if (index === people.length - 1) {
+          return 0;
+        } else {
+          return prevIndex + 1;
+        }
       }
     });
   };
@@ -33,10 +41,10 @@ const Review = () => {
       <p className="job">{job}</p>
       <p className="info">{text}</p>
       <div className="button-container">
-        <button onClick={() => changeReview()} className="prev-btn">
+        <button onClick={() => changeReview("prev")} className="prev-btn">
           <FaChevronLeft />
         </button>
-        <button onClick={() => changeReview()} className="next-btn">
+        <button onClick={() => changeReview("next")} className="next-btn">
           <FaChevronRight />
         </button>
       </div>
