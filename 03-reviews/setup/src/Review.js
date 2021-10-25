@@ -6,22 +6,26 @@ const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, job, image, text } = people[index];
 
+  const checkIndex = (index) => {
+    if (index < 0) {
+      return people.length - 1;
+    }
+    if (index > people.length - 1 ) {
+      return 0;
+    }
+    return index;
+  };
+
   const changeReview = (type) => {
-    setIndex((prevIndex) => {
-      if (type === "prev") {
-        if (index == 0) {
-          return people.length - 1;
-        } else {
-          return index - 1;
-        }
-      } else {
-        if (index === people.length - 1) {
-          return 0;
-        } else {
-          return prevIndex + 1;
-        }
-      }
-    });
+    if (type === "prev") {
+      setIndex((prevIndex) => {
+        return checkIndex(prevIndex - 1);
+      });
+    } else {
+      setIndex((prevIndex) => {
+        return checkIndex(prevIndex + 1);
+      });
+    }
   };
 
   const surpriseMe = () => {
