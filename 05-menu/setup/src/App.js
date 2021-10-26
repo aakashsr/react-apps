@@ -3,6 +3,8 @@ import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
 import Title from "./Title";
+// const allCategories = ['all', ...new Set(items.map((item) => item.category))]; // Short and alternate approach to get unique categories.
+
 
 function App() {
   const [filteredItems, setFilteredItems] = useState(items);
@@ -14,12 +16,12 @@ function App() {
     }
   });
 
-  const filterRecipes = (e) => {
-    if (e.target.textContent === "all") {
+  const filterRecipes = (category) => {
+    if (category === "all") {
       setFilteredItems(items);
     } else {
       const newRecipes = items.filter(
-        (item) => item.category === e.target.textContent
+        (item) => item.category === category
       );
       setFilteredItems(newRecipes);
     }
