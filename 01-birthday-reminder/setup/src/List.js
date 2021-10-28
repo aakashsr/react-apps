@@ -1,18 +1,19 @@
 import React from "react";
 
-const List = ({item}) => {
-  console.log(item);
-  return (
-    <>
-      <div key={item.id} className="person">
-        <img src={item.image} alt="thumbnail" />
+const List = ({ data }) => {
+  const allPersons = data.map((person) => {
+    const { image, name, age } = person;
+    return (
+      <article className="person">
+        <img src={image} alt={name} />
         <div>
-          <h4>{item.name}</h4>
-          <p>{item.age} years</p>
+          <h4>{name}</h4>
+          <p>{age} years</p>
         </div>
-      </div>
-    </>
-  );
+      </article>
+    );
+  });
+  return allPersons;
 };
 
 export default List;
