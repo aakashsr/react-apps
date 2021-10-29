@@ -5,18 +5,19 @@ const url = "https://course-api.com/react-tours-project";
 
 function App() {
   const [tourData, setTourData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const deleteTour = (id) => {
-    const newTours = tourData.filter((tour) => tour.id !== id)
-    setTourData(newTours);
-  };
+  const [loading, setLoading] = useState(false);
 
   const fetchTours = async () => {
+    setLoading(true);
     const response = await fetch(url);
     const toursData = await response.json();
     setTourData(toursData);
     setLoading(false);
+  };
+
+  const deleteTour = (id) => {
+    const newTours = tourData.filter((tour) => tour.id !== id);
+    setTourData(newTours);
   };
 
   useEffect(() => {
@@ -24,7 +25,11 @@ function App() {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <main>
+        <Loading />
+      </main>
+    );
   }
 
   return (
@@ -37,13 +42,9 @@ function App() {
               Refresh
             </button>
           )}
-          <div className="underline"></div>
+          {tourData.length > 0 && <div className="underline"></div>}
         </div>
-        <Tours
-          setTourData={setTourData}
-          tourData={tourData}
-          deleteTour={deleteTour}
-        />
+        <Tours tourData={tourData} deleteTour={deleteTour} />
       </main>
     </>
   );

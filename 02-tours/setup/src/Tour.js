@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-const Tour = ({ tour, id, deleteTour }) => {
+const Tour = ({image, info, name, price, id, deleteTour }) => {
   const [readMore, setReadMore] = useState(true);
 
   return (
     <div className="single-tour">
-      <img src={tour.image} alt={tour.name} />
+      <img src={image} alt={name} />
       <footer>
         <div className="tour-info">
-          <h4>{tour.name}</h4>
-          <div className="tour-price">{tour.price}</div>
+          <h4>{name}</h4>
+          <div className="tour-price">{price}</div>
         </div>
         <p>
-          {readMore ? tour.info.substring(0, 200) + "..." : tour.info}
+          {readMore ? info.substring(0, 200) + "..." : info}
           <button onClick={() => setReadMore(!readMore)}>
             {readMore ? "Read More" : "Show Less"}
           </button>
