@@ -11,6 +11,12 @@ const SingleColor = ({ rgb, weight, index, hex }) => {
     navigator.clipboard.writeText(hexValue);
   };
 
+  useEffect(() => {
+    const copy = setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+    return () => clearTimeout(copy);
+  }, [alert]);
   return (
     <article
       style={{ backgroundColor: `rgb(${bgColor})` }}
