@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setItems([...items, itemValue]);
-    setItemValue("");
+    setItemValue("")
   };
 
   const removeItem = (item) => {
