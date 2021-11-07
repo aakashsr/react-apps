@@ -8,21 +8,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItems([...items, itemValue]);
-    setItemValue("")
+    const newItem = { id: new Date().getTime().toString(), title: itemValue };
+    setItems([...items, newItem]);
+    setItemValue("");
   };
 
-  const removeItem = (item) => {
-    const newItems = items.filter((value) => value !== item);
+  const removeItem = (id) => {
+    const newItems = items.filter((item) => item.id !== id);
     setItems(newItems);
   };
 
   const itemsList = items.map((item) => {
-    return <List item={item} remove={removeItem} />;
+    return <List key={item.id} item={item} remove={removeItem} />;
   });
 
-
-  console.log(items);
   return (
     <section className="section-center">
       <form action="" className="grocery-form">
@@ -41,7 +40,12 @@ function App() {
         </div>
       </form>
       {itemsList.length !== 0 && (
-        <div className="grocery-container">{itemsList}</div>
+        <div className="grocery-container">
+          <div className="grocery-list">{itemsList}</div>
+          <button onClick={() => setItems([])} className="clear-btn">
+            Clear items
+          </button>
+        </div>
       )}
     </section>
   );
