@@ -7,35 +7,35 @@ function App() {
   const [items, setItems] = useState([]);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
+  const showAlert = (show = "", msg = "", type = "") => {
+    setAlert({ show, msg, type });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (itemValue === "") {
-      return setAlert({
-        show: true,
-        msg: "Please enter some value",
-        type: "danger",
-      });
+      return showAlert(true, "Please enter some value", "danger");
     }
 
     const newItem = { id: new Date().getTime().toString(), title: itemValue };
     setItems([...items, newItem]);
     setItemValue("");
-    setAlert({ show: true, msg: "Items added to the list", type: "success" });
+    showAlert(true, "Items added to the list", "success");
   };
 
   const removeItem = (id) => {
     const newItems = items.filter((item) => item.id !== id);
     setItems(newItems);
-    if(newItems.length === 0){
-      setAlert({ show: true, msg: "Empty list", type: "danger" });
+    if (newItems.length === 0) {
+      showAlert(true, "Empty list", "danger");
     } else {
-      setAlert({ show: true, msg: "Item removed", type: "danger" });
+      showAlert(true, "Item removed", "danger");
     }
   };
 
   const clearList = () => {
     setItems([]);
-    setAlert({ show: true, msg: "Empty list", type: "danger" });
+    showAlert(true, "Empty list", "danger");
   };
 
   const itemsList = items.map((item) => {
@@ -46,7 +46,12 @@ function App() {
     <section className="section-center">
       <form action="" className="grocery-form">
         {alert.show && (
-          <Alert type={alert.type} msg={alert.msg} setAlert={setAlert} items={items} />
+          <Alert
+            type={alert.type}
+            msg={alert.msg}
+            setAlert={setAlert}
+            items={items}
+          />
         )}
         <h3>Grocery bud</h3>
         <div className="form-control">
