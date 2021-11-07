@@ -1,7 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-const Alert = () => {
-  return <h2>alert component</h2>
-}
+const Alert = ({ type, msg, setAlert ,items}) => {
+  useEffect(() => {
+    let showToaster = setTimeout(() => {
+      setAlert({ ...alert, show: false });
+    }, 3000);
+    return () => clearTimeout(showToaster);
+  },[items]);
+  if (type === "success") {
+    return <p className="alert alert-success">{msg}</p>;
+  }
 
-export default Alert
+  if (type === "danger") {
+    return <p className="alert alert-danger">{msg}</p>;
+  }
+};
+
+export default Alert;
